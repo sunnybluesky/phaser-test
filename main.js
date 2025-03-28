@@ -1,3 +1,10 @@
+const bgm = {
+    playing:new Audio("assets/UsagiFlap.m4a"),
+}
+bgm.playing.addEventListener("canplaythrough",()=>{
+    bgm.playing.loop = true
+    bgm.playing.play()
+})
 // Pixiアプリケーション生成
 let app = new PIXI.Application({
     width: 1280,     // スクリーン(ビュー)横幅 
@@ -12,7 +19,7 @@ el.appendChild(app.view);
             const textures = [];
             for (let i = 0; i < 24; i++) {
                 var num = i == 0 ? "" : i + 1
-                textures.push(PIXI.Texture.from(`img/al-1s/aris${num}.png`));  // run0.png, run1.png, ...
+                textures.push(PIXI.Texture.from(`assets/img/al-1s/aris${num}.png`));  // run0.png, run1.png, ...
             }
 
             // スプライトを作成
