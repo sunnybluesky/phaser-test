@@ -8,6 +8,17 @@ let app = new PIXI.Application({
 let el = document.getElementById('app');
 el.appendChild(app.view);
 
+            // スプライトシートからアニメーションを作成
+            const textures = [];
+            for (let i = 0; i < 24; i++) {
+                var num = i == 1 ? "" : i + 1
+                textures.push(PIXI.Texture.from(`img/al-1s${num}.png`));  // run0.png, run1.png, ...
+            }
+
+            // スプライトを作成
+            heroSprite = new PIXI.Sprite(textures[0]);  // 最初のフレームを使ってスプライト作成
+           
+
         // プレイヤーキャラクターを作成
         const player = new PIXI.Graphics();
         player.beginFill(0xFF0000); // 赤色
