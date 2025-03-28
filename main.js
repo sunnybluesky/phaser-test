@@ -11,22 +11,20 @@ el.appendChild(app.view);
             // スプライトシートからアニメーションを作成
             const textures = [];
             for (let i = 0; i < 24; i++) {
-                var num = i == 1 ? "" : i + 1
-                textures.push(PIXI.Texture.from(`img/al-1s${num}.png`));  // run0.png, run1.png, ...
+                var num = i == 0 ? "" : i + 1
+                textures.push(PIXI.Texture.from(`img/al-1s/aris${num}.png`));  // run0.png, run1.png, ...
             }
 
             // スプライトを作成
-            heroSprite = new PIXI.Sprite(textures[0]);  // 最初のフレームを使ってスプライト作成
+            const player = new PIXI.AnimatedSprite(textures);  // 最初のフレームを使ってスプライト作成
            
 
         // プレイヤーキャラクターを作成
-        const player = new PIXI.Graphics();
-        player.beginFill(0xFF0000); // 赤色
-        player.drawRect(-25, -50, 50, 100); // キャラクターのサイズ
-        player.endFill();
+        player.scale.set(0.5)
         player.x = app.screen.width / 2;
         player.y = app.screen.height - 100; // 画面下部に配置
-
+        player.animationSpeed = 0.5;
+        player.play()
         app.stage.addChild(player);
 
         // 物理演算用の変数
@@ -52,8 +50,8 @@ el.appendChild(app.view);
             player.y += velocityY;
 
             // プレイヤーが地面に到達したらジャンプ可能状態に戻す
-            if (player.y >= app.screen.height - 100) {
-                player.y = app.screen.height - 100;
+            if (player.y >= app.screen.height - 300) {
+                player.y = app.screen.height - 300;
                 velocityY = 0;
                 isJumping = false;
             }
@@ -82,6 +80,6 @@ el.appendChild(app.view);
                 player.x += 5;
             }
             if (keys["ArrowUp"]){
-                velocityY = -10
+                jump(10)
             }
         });
